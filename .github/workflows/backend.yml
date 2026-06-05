@@ -1,0 +1,19 @@
+name: Backend Pipeline
+
+on:
+  push:
+    branches: ["main"]
+    paths:
+      - "backend/**"
+      - ".github/workflows/backend.yml"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v4
+
+      - name: Build docker file
+        working-directory: ./backend
+        run: docker build -t backend .
